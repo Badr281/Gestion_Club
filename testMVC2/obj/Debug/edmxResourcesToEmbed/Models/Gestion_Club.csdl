@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Gestion_clubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="abonnement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="type_sport" Type="Int32" />
+    <Property Name="id_abonne" Type="Int32" />
+    <Property Name="date_debut" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="adherent" Relationship="Self.FK__abonnemen__id_ab__15502E78" FromRole="abonnement" ToRole="adherent" />
+    <NavigationProperty Name="sport" Relationship="Self.FK__abonnemen__type___145C0A3F" FromRole="abonnement" ToRole="sport" />
+    <NavigationProperty Name="payements" Relationship="Self.FK__payement__id_abo__1920BF5C" FromRole="abonnement" ToRole="payement" />
+  </EntityType>
+  <EntityType Name="adherent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="adresse" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="abonnements" Relationship="Self.FK__abonnemen__id_ab__15502E78" FromRole="adherent" ToRole="abonnement" />
+  </EntityType>
+  <EntityType Name="payement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="payer" Type="Byte" />
+    <Property Name="mois_courant" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="id_abonnement" Type="Int32" />
+    <NavigationProperty Name="abonnement" Relationship="Self.FK__payement__id_abo__1920BF5C" FromRole="payement" ToRole="abonnement" />
+  </EntityType>
+  <EntityType Name="sport">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="libele" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="abonnements" Relationship="Self.FK__abonnemen__type___145C0A3F" FromRole="sport" ToRole="abonnement" />
+  </EntityType>
+  <Association Name="FK__abonnemen__id_ab__15502E78">
+    <End Role="adherent" Type="Self.adherent" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="adherent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="id_abonne" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__abonnemen__type___145C0A3F">
+    <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sport">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="type_sport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__payement__id_abo__1920BF5C">
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="0..1" />
+    <End Role="payement" Type="Self.payement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="abonnement">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="payement">
+        <PropertyRef Name="id_abonnement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Gestion_clubEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="abonnements" EntityType="Self.abonnement" />
+    <EntitySet Name="adherents" EntityType="Self.adherent" />
+    <EntitySet Name="payements" EntityType="Self.payement" />
+    <EntitySet Name="sports" EntityType="Self.sport" />
+    <AssociationSet Name="FK__abonnemen__id_ab__15502E78" Association="Self.FK__abonnemen__id_ab__15502E78">
+      <End Role="adherent" EntitySet="adherents" />
+      <End Role="abonnement" EntitySet="abonnements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__abonnemen__type___145C0A3F" Association="Self.FK__abonnemen__type___145C0A3F">
+      <End Role="sport" EntitySet="sports" />
+      <End Role="abonnement" EntitySet="abonnements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__payement__id_abo__1920BF5C" Association="Self.FK__payement__id_abo__1920BF5C">
+      <End Role="abonnement" EntitySet="abonnements" />
+      <End Role="payement" EntitySet="payements" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

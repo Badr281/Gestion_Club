@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Gestion_clubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="abonnement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date_debut" Type="date" />
+    <Property Name="id_sport" Type="int" />
+    <Property Name="id_abonne" Type="int" />
+  </EntityType>
+  <EntityType Name="adherent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="20" />
+    <Property Name="prenom" Type="varchar" MaxLength="20" />
+    <Property Name="adresse" Type="varchar" MaxLength="30" />
+    <Property Name="tel" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="payement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_abonnement" Type="int" />
+    <Property Name="mois_courant" Type="date" />
+    <Property Name="payer" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="sport">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libele" Type="varchar" MaxLength="20" />
+    <Property Name="description" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <Association Name="FK__abonnemen__id_ab__286302EC">
+    <End Role="adherent" Type="Self.adherent" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="adherent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="id_abonne" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__abonnemen__id_sp__276EDEB3">
+    <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sport">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="id_sport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__payement__id_abo__2B3F6F97">
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="0..1" />
+    <End Role="payement" Type="Self.payement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="abonnement">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="payement">
+        <PropertyRef Name="id_abonnement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Gestion_clubModelStoreContainer">
+    <EntitySet Name="abonnement" EntityType="Self.abonnement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="adherent" EntityType="Self.adherent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="payement" EntityType="Self.payement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sport" EntityType="Self.sport" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__abonnemen__id_ab__286302EC" Association="Self.FK__abonnemen__id_ab__286302EC">
+      <End Role="adherent" EntitySet="adherent" />
+      <End Role="abonnement" EntitySet="abonnement" />
+    </AssociationSet>
+    <AssociationSet Name="FK__abonnemen__id_sp__276EDEB3" Association="Self.FK__abonnemen__id_sp__276EDEB3">
+      <End Role="sport" EntitySet="sport" />
+      <End Role="abonnement" EntitySet="abonnement" />
+    </AssociationSet>
+    <AssociationSet Name="FK__payement__id_abo__2B3F6F97" Association="Self.FK__payement__id_abo__2B3F6F97">
+      <End Role="abonnement" EntitySet="abonnement" />
+      <End Role="payement" EntitySet="payement" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Gestion_clubModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="abonnement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_debut" Type="date" />
+          <Property Name="id_sport" Type="int" />
+          <Property Name="id_abonne" Type="int" />
+        </EntityType>
+        <EntityType Name="adherent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="20" />
+          <Property Name="prenom" Type="varchar" MaxLength="20" />
+          <Property Name="adresse" Type="varchar" MaxLength="30" />
+          <Property Name="tel" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="payement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_abonnement" Type="int" />
+          <Property Name="mois_courant" Type="date" />
+          <Property Name="payer" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="sport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libele" Type="varchar" MaxLength="20" />
+          <Property Name="description" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <Association Name="FK__abonnemen__id_ab__286302EC">
+          <End Role="adherent" Type="Self.adherent" Multiplicity="0..1" />
+          <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adherent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="abonnement">
+              <PropertyRef Name="id_abonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__abonnemen__id_sp__276EDEB3">
+          <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+          <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="abonnement">
+              <PropertyRef Name="id_sport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__payement__id_abo__2B3F6F97">
+          <End Role="abonnement" Type="Self.abonnement" Multiplicity="0..1" />
+          <End Role="payement" Type="Self.payement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="abonnement">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payement">
+              <PropertyRef Name="id_abonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gestion_clubModel1StoreContainer">
+          <EntitySet Name="abonnement" EntityType="Self.abonnement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="adherent" EntityType="Self.adherent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payement" EntityType="Self.payement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sport" EntityType="Self.sport" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__abonnemen__id_ab__286302EC" Association="Self.FK__abonnemen__id_ab__286302EC">
+            <End Role="adherent" EntitySet="adherent" />
+            <End Role="abonnement" EntitySet="abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__abonnemen__id_sp__276EDEB3" Association="Self.FK__abonnemen__id_sp__276EDEB3">
+            <End Role="sport" EntitySet="sport" />
+            <End Role="abonnement" EntitySet="abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__payement__id_abo__2B3F6F97" Association="Self.FK__payement__id_abo__2B3F6F97">
+            <End Role="abonnement" EntitySet="abonnement" />
+            <End Role="payement" EntitySet="payement" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Gestion_clubModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="abonnement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_debut" Type="DateTime" Precision="0" />
+          <Property Name="id_sport" Type="Int32" />
+          <Property Name="id_abonne" Type="Int32" />
+          <NavigationProperty Name="adherent" Relationship="Self.FK__abonnemen__id_ab__286302EC" FromRole="abonnement" ToRole="adherent" />
+          <NavigationProperty Name="sport" Relationship="Self.FK__abonnemen__id_sp__276EDEB3" FromRole="abonnement" ToRole="sport" />
+          <NavigationProperty Name="payements" Relationship="Self.FK__payement__id_abo__2B3F6F97" FromRole="abonnement" ToRole="payement" />
+        </EntityType>
+        <EntityType Name="adherent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="adresse" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="abonnements" Relationship="Self.FK__abonnemen__id_ab__286302EC" FromRole="adherent" ToRole="abonnement" />
+        </EntityType>
+        <EntityType Name="payement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_abonnement" Type="Int32" />
+          <Property Name="mois_courant" Type="DateTime" Precision="0" />
+          <Property Name="payer" Type="Byte" />
+          <NavigationProperty Name="abonnement" Relationship="Self.FK__payement__id_abo__2B3F6F97" FromRole="payement" ToRole="abonnement" />
+        </EntityType>
+        <EntityType Name="sport">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libele" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="abonnements" Relationship="Self.FK__abonnemen__id_sp__276EDEB3" FromRole="sport" ToRole="abonnement" />
+        </EntityType>
+        <Association Name="FK__abonnemen__id_ab__286302EC">
+          <End Role="adherent" Type="Self.adherent" Multiplicity="0..1" />
+          <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adherent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="abonnement">
+              <PropertyRef Name="id_abonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__abonnemen__id_sp__276EDEB3">
+          <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+          <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="abonnement">
+              <PropertyRef Name="id_sport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__payement__id_abo__2B3F6F97">
+          <End Role="abonnement" Type="Self.abonnement" Multiplicity="0..1" />
+          <End Role="payement" Type="Self.payement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="abonnement">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="payement">
+              <PropertyRef Name="id_abonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gestion_clubEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="abonnements" EntityType="Self.abonnement" />
+          <EntitySet Name="adherents" EntityType="Self.adherent" />
+          <EntitySet Name="payements" EntityType="Self.payement" />
+          <EntitySet Name="sports" EntityType="Self.sport" />
+          <AssociationSet Name="FK__abonnemen__id_ab__286302EC" Association="Self.FK__abonnemen__id_ab__286302EC">
+            <End Role="adherent" EntitySet="adherents" />
+            <End Role="abonnement" EntitySet="abonnements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__abonnemen__id_sp__276EDEB3" Association="Self.FK__abonnemen__id_sp__276EDEB3">
+            <End Role="sport" EntitySet="sports" />
+            <End Role="abonnement" EntitySet="abonnements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__payement__id_abo__2B3F6F97" Association="Self.FK__payement__id_abo__2B3F6F97">
+            <End Role="abonnement" EntitySet="abonnements" />
+            <End Role="payement" EntitySet="payements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Gestion_clubModel1StoreContainer" CdmEntityContainer="Gestion_clubEntities1">
+          <EntitySetMapping Name="abonnements">
+            <EntityTypeMapping TypeName="Gestion_clubModel1.abonnement">
+              <MappingFragment StoreEntitySet="abonnement">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date_debut" ColumnName="date_debut" />
+                <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+                <ScalarProperty Name="id_abonne" ColumnName="id_abonne" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="adherents">
+            <EntityTypeMapping TypeName="Gestion_clubModel1.adherent">
+              <MappingFragment StoreEntitySet="adherent">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payements">
+            <EntityTypeMapping TypeName="Gestion_clubModel1.payement">
+              <MappingFragment StoreEntitySet="payement">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+                <ScalarProperty Name="mois_courant" ColumnName="mois_courant" />
+                <ScalarProperty Name="payer" ColumnName="payer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sports">
+            <EntityTypeMapping TypeName="Gestion_clubModel1.sport">
+              <MappingFragment StoreEntitySet="sport">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="libele" ColumnName="libele" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

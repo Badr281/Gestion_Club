@@ -1,0 +1,26 @@
+﻿@model testMVC2.Models.Album
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>modifierAlbum</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(s => s.titre)
+    @Html.ValidationMessageFor(s => s.titre)
+
+    @Html.TextBoxFor(m => m.prix)
+    @Html.ValidationMessageFor(s => s.prix)
+
+    @Html.LabelFor(m => m.categorie)
+    @Html.DropDownListFor(m => m.categorie, (SelectList)ViewBag.categorie, "Types")
+    @Html.ValidationMessageFor(s => s.categorie)
+
+    <input type="submit" value="Modifier" />
+}
+
+
+
+
+

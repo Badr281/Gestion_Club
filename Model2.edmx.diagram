@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="28a31bb028584e7eb69b56d285ff0e1c" Name="Diagram1">
+        <EntityTypeShape EntityType="Gestion_clubModel1.abonnement" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gestion_clubModel1.adherent" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gestion_clubModel1.payement" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Gestion_clubModel1.sport" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <AssociationConnector Association="Gestion_clubModel1.FK__abonnemen__id_ab__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="Gestion_clubModel1.FK__abonnemen__id_sp__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="Gestion_clubModel1.FK__payement__id_abo__2B3F6F97" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

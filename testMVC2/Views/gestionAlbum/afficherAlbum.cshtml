@@ -1,0 +1,15 @@
+﻿@model testMVC2.Models.Album
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>afficherAlbum</h2>
+@Html.DisplayNameFor(s=>s.titre)
+@Html.DisplayFor(s => s.titre)
+
+@Html.DisplayFor(s => s.categorie)
+
+@Html.DisplayFor(s => s.prix)
+<br />
+@Html.ActionLink("modifier", "modifierAlbum", Model)
+

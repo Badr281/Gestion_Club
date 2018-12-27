@@ -1,0 +1,49 @@
+﻿@model IEnumerable<testMVC2.Models.adherent_paye>
+@{
+    ViewBag.Title = "adherentPaye";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>adherentPaye</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model._payer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model._sport)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._payer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._sport)
+            </td>
+            <td>
+              
+            </td>
+        </tr>
+    }
+
+</table>
+

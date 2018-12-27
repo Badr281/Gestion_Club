@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Gestion_clubModelStoreContainer" CdmEntityContainer="Gestion_clubEntities">
+    <EntitySetMapping Name="abonnements">
+      <EntityTypeMapping TypeName="Gestion_clubModel.abonnement">
+        <MappingFragment StoreEntitySet="abonnement">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="type_sport" ColumnName="type_sport" />
+          <ScalarProperty Name="id_abonne" ColumnName="id_abonne" />
+          <ScalarProperty Name="date_debut" ColumnName="date_debut" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="adherents">
+      <EntityTypeMapping TypeName="Gestion_clubModel.adherent">
+        <MappingFragment StoreEntitySet="adherent">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="adresse" ColumnName="adresse" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payements">
+      <EntityTypeMapping TypeName="Gestion_clubModel.payement">
+        <MappingFragment StoreEntitySet="payement">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="payer" ColumnName="payer" />
+          <ScalarProperty Name="mois_courant" ColumnName="mois_courant" />
+          <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sports">
+      <EntityTypeMapping TypeName="Gestion_clubModel.sport">
+        <MappingFragment StoreEntitySet="sport">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="libele" ColumnName="libele" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
